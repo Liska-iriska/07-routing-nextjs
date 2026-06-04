@@ -13,16 +13,26 @@ interface HTTPResponse {
   totalPages: number;
 }
 
+export type Category = {
+  id: string;
+  name: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
 export const fetchNotes = async (
-  searchTerm: string,
+  searchTerm?: string,
   page: number = 1,
   perPage: number = 12,
+  tag?: string,
 ) => {
   const response = await instance.get<HTTPResponse>("/notes", {
     params: {
-      search: searchTerm.trim() || undefined,
+      search: searchTerm?.trim() || undefined,
       page,
       perPage,
+      tag,
     },
   });
 
@@ -46,4 +56,11 @@ export const deleteNote = async (id: string): Promise<Note> => {
 export const fetchNoteById = async (id: string): Promise<Note> => {
   const { data } = await instance.get<Note>(`/notes/${id}`);
   return data;
+};
+
+export const getNotes = async (categoryId?: string) => {
+  const res = await instance.get<HTTPResponse>("/notes", {
+    params: { categoryId },
+  });
+  return res.data;
 };

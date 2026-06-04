@@ -37,7 +37,7 @@ export default function NotesClient({ tag }: Props) {
   return (
     <div className={css.app}>
       <header className={css.toolbar}>
-        <SearchBox value={query} onSearch={debouncedSearch} />
+        <SearchBox onSearch={debouncedSearch} />
 
         <button
           className={css.button}

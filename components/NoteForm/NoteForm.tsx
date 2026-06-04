@@ -19,7 +19,7 @@ interface NoteFormProps {
 const initialValues: NoteFormValues = {
   title: "",
   content: "",
-  tag: "",
+  tag: "Todo",
 };
 
 const validationSchema = Yup.object().shape({
